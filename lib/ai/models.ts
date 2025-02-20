@@ -1,18 +1,28 @@
 import { openai } from '@ai-sdk/openai';
 import { fireworks } from '@ai-sdk/fireworks';
+import { anthropic } from '@ai-sdk/anthropic';
+import { xai } from '@ai-sdk/xai';
+import { perplexity } from '@ai-sdk/perplexity';
 import {
   customProvider,
   extractReasoningMiddleware,
   wrapLanguageModel,
 } from 'ai';
 
-export const DEFAULT_CHAT_MODEL: string = 'chat-model-small';
+export const DEFAULT_CHAT_MODEL: string = 'deepseek-r1';
 
 export const myProvider = customProvider({
   languageModels: {
-    'chat-model-small': openai('gpt-4o-mini'),
-    'chat-model-large': openai('gpt-4o'),
-    'chat-model-reasoning': wrapLanguageModel({
+    'gpt-4o-mini': openai('gpt-4o-mini'),
+    'gpt-4o': openai('gpt-4o'),
+    'claude-3-5-sonnet': anthropic('claude-3-5-sonnet-latest'),
+    'xai': xai('grok-beta'),
+    'perplexity-sonar-pro': perplexity('sonar-pro'),
+    'perplexity-reasoning': wrapLanguageModel({
+      model: perplexity('sonar-reasoning-pro'),
+      middleware: extractReasoningMiddleware({ tagName: 'think' }),
+    }),
+    'deepseek-r1': wrapLanguageModel({
       model: fireworks('accounts/fireworks/models/deepseek-r1'),
       middleware: extractReasoningMiddleware({ tagName: 'think' }),
     }),
@@ -33,18 +43,38 @@ interface ChatModel {
 
 export const chatModels: Array<ChatModel> = [
   {
-    id: 'chat-model-small',
-    name: 'Small model',
+    id: 'gpt-4o-mini',
+    name: 'GPT-4o-mini',
     description: 'Small model for fast, lightweight tasks',
   },
   {
-    id: 'chat-model-large',
-    name: 'Large model',
+    id: 'gpt-4o',
+    name: 'GPT-4o',
     description: 'Large model for complex, multi-step tasks',
   },
   {
-    id: 'chat-model-reasoning',
-    name: 'Reasoning model',
+    id: 'perplexity-sonar-pro',
+    name: 'Perplexity Sonar Pro',
+    description: 'Uses advanced reasoning',
+  },
+  {
+    id: 'perplexity-reasoning',
+    name: 'Perplexity Reasoning',
+    description: 'Uses advanced reasoning',
+  },
+  {
+    id: 'deepseek-r1',
+    name: 'DeepSeek R1',
+    description: 'Uses advanced reasoning',
+  },
+  {
+    id: 'claude-3-5-sonnet',
+    name: 'Claude 3.5 Sonnet',
+    description: 'Uses advanced reasoning',
+  },
+  {
+    id: 'xai',
+    name: 'XAI',
     description: 'Uses advanced reasoning',
   },
 ];
