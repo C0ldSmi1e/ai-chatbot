@@ -9,6 +9,11 @@ const nextConfig: NextConfig = {
       {
         hostname: 'avatar.vercel.sh',
       },
+      {
+        protocol: 'https',
+        hostname: 'https://oao9e28k4psanad9.public.blob.vercel-storage.com',
+        port: '',
+      },
     ],
   },
 };
