@@ -71,7 +71,7 @@ export const chatModels: Array<ChatModel> = [
   },
   {
     id: 'xai',
-    name: 'XAI',
+    name: 'xAI',
     description: '',
   },
 ];
