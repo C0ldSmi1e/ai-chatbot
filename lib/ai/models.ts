@@ -15,13 +15,10 @@ export const myProvider = customProvider({
   languageModels: {
     'gpt-4o-mini': openai('gpt-4o-mini'),
     'gpt-4o': openai('gpt-4o'),
-    'claude-3-5-sonnet': anthropic('claude-3-5-sonnet-latest'),
-    'xai': xai('grok-beta'),
+    'gpt-o3-mini': openai('o3-mini'),
+    'claude-3-5-sonnet': anthropic('claude-3-5-sonnet-20241022'),
+    'xai': xai('grok-2-1212'),
     'perplexity-sonar-pro': perplexity('sonar-pro'),
-    'perplexity-reasoning': wrapLanguageModel({
-      model: perplexity('sonar-reasoning-pro'),
-      middleware: extractReasoningMiddleware({ tagName: 'think' }),
-    }),
     'deepseek-r1': wrapLanguageModel({
       model: fireworks('accounts/fireworks/models/deepseek-r1'),
       middleware: extractReasoningMiddleware({ tagName: 'think' }),
@@ -45,36 +42,36 @@ export const chatModels: Array<ChatModel> = [
   {
     id: 'gpt-4o-mini',
     name: 'GPT-4o-mini',
-    description: 'Small model for fast, lightweight tasks',
+    description: '',
   },
   {
     id: 'gpt-4o',
     name: 'GPT-4o',
-    description: 'Large model for complex, multi-step tasks',
+    description: '',
+  },
+  {
+    id: 'gpt-o3-mini',
+    name: 'GPT-o3-mini',
+    description: '',
   },
   {
     id: 'perplexity-sonar-pro',
     name: 'Perplexity Sonar Pro',
-    description: 'Uses advanced reasoning',
-  },
-  {
-    id: 'perplexity-reasoning',
-    name: 'Perplexity Reasoning',
-    description: 'Uses advanced reasoning',
+    description: '',
   },
   {
     id: 'deepseek-r1',
     name: 'DeepSeek R1',
-    description: 'Uses advanced reasoning',
+    description: '',
   },
   {
     id: 'claude-3-5-sonnet',
     name: 'Claude 3.5 Sonnet',
-    description: 'Uses advanced reasoning',
+    description: '',
   },
   {
     id: 'xai',
     name: 'XAI',
-    description: 'Uses advanced reasoning',
+    description: '',
   },
 ];
