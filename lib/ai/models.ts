@@ -3,6 +3,7 @@ import { fireworks } from '@ai-sdk/fireworks';
 import { anthropic } from '@ai-sdk/anthropic';
 import { xai } from '@ai-sdk/xai';
 import { perplexity } from '@ai-sdk/perplexity';
+import { google } from '@ai-sdk/google';
 import {
   customProvider,
   extractReasoningMiddleware,
@@ -16,7 +17,15 @@ export const myProvider = customProvider({
     'gpt-4o-mini': openai('gpt-4o-mini'),
     'gpt-4o': openai('gpt-4o'),
     'gpt-o3-mini': openai('o3-mini'),
-    'claude-3-5-sonnet': anthropic('claude-3-5-sonnet-20241022'),
+    'gemini-2.5-pro': wrapLanguageModel({
+      model: google('gemini-2.5-pro-exp-03-25') as any,
+      middleware: extractReasoningMiddleware({ tagName: 'think' }),
+    }),
+    'gemini-2.0-flash': wrapLanguageModel({
+      model: google('gemini-2.0-flash-001') as any,
+      middleware: extractReasoningMiddleware({ tagName: 'think' }),
+    }),
+    'claude-3-7-sonnet': anthropic('claude-3-7-sonnet-20250219'),
     'xai': xai('grok-2-1212'),
     'perplexity-sonar-pro': perplexity('sonar-pro'),
     'deepseek-r1': wrapLanguageModel({
@@ -40,6 +49,16 @@ interface ChatModel {
 
 export const chatModels: Array<ChatModel> = [
   {
+    id: "claude-3-7-sonnet",
+    name: 'Claude 3.7 Sonnet',
+    description: '',
+  },
+  {
+    id: 'gpt-o3-mini',
+    name: 'GPT-o3-mini',
+    description: '',
+  },
+  {
     id: 'gpt-4o-mini',
     name: 'GPT-4o-mini',
     description: '',
@@ -47,11 +66,6 @@ export const chatModels: Array<ChatModel> = [
   {
     id: 'gpt-4o',
     name: 'GPT-4o',
-    description: '',
-  },
-  {
-    id: 'gpt-o3-mini',
-    name: 'GPT-o3-mini',
     description: '',
   },
   {
@@ -65,13 +79,18 @@ export const chatModels: Array<ChatModel> = [
     description: '',
   },
   {
-    id: 'claude-3-5-sonnet',
-    name: 'Claude 3.5 Sonnet',
+    id: 'xai',
+    name: 'xAI',
     description: '',
   },
   {
-    id: 'xai',
-    name: 'xAI',
+    id: 'gemini-2.5-pro',
+    name: 'Gemini 2.5 Pro',
+    description: '',
+  },
+  {
+    id: 'gemini-2.0-flash',
+    name: 'Gemini 2.0 Flash',
     description: '',
   },
 ];
